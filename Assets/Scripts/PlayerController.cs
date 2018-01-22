@@ -18,17 +18,16 @@ public class PlayerController : MonoBehaviour {
         rb = GetComponent<Rigidbody>();
         score = 0;
 	}
-	
-	// Update is called once per frame
-	void FixedUpdate ()
+
+    private void Update()
     {
         var moveHorizontal = Input.GetAxis("Horizontal");
         var moveVertical = Input.GetAxis("Vertical");
         var movement = new Vector3(moveHorizontal, 0, moveVertical);
         var cameraTransform = Quaternion.AngleAxis(45.0f, Vector3.up);
 
-        rb.AddForce((cameraTransform * movement) * speed);
-	}
+        rb.AddForce((cameraTransform * movement) * speed * Time.deltaTime * 60);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
