@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour {
 
     public float speed;
     public Text scoreDisplay;
+    public float cameraAngle = 45.0f;
 
     private Rigidbody rb;
     private int score;
@@ -24,8 +25,9 @@ public class PlayerController : MonoBehaviour {
         var moveHorizontal = Input.GetAxis("Horizontal");
         var moveVertical = Input.GetAxis("Vertical");
         var movement = new Vector3(moveHorizontal, 0, moveVertical);
+        var cameraTransform = Quaternion.AngleAxis(45.0f, Vector3.up);
 
-        rb.AddForce(movement * speed);
+        rb.AddForce((cameraTransform * movement) * speed);
 	}
 
     private void OnTriggerEnter(Collider other)
